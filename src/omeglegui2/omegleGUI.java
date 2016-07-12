@@ -109,7 +109,7 @@ public class omegleGUI {
 		frmOmegle.setForeground(Color.RED);
 		frmOmegle.setResizable(false);
 		frmOmegle.setTitle("Omegle ");
-		frmOmegle.setBounds(100, 100, 639, 485);
+		frmOmegle.setBounds(100, 100, 639, 506);
 		frmOmegle.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
@@ -184,22 +184,37 @@ public class omegleGUI {
 		
 		JPanel panel_6 = new JPanel();
 		panel_6.setBorder(new TitledBorder(new LineBorder(new Color(184, 207, 229)), "Question", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(51, 51, 51)));
-		panel_6.setBounds(29, 7, 543, 51);
+		panel_6.setBounds(29, 7, 580, 73);
 		panel_5.add(panel_6);
 		panel_6.setLayout(null);
 		
 		JLabel questionLabel = new JLabel("");
-		questionLabel.setBounds(5, 18, 532, 27);
+		questionLabel.setVerticalAlignment(SwingConstants.TOP);
+		questionLabel.setFont(new Font("Segoe UI Symbol", Font.PLAIN, 12));
+		questionLabel.setBounds(5, 18, 569, 49);
 		panel_6.add(questionLabel);
 		
 		JScrollPane scrollPane_3 = new JScrollPane(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-		scrollPane_3.setBounds(32, 337, 540, 44);
+		scrollPane_3.setBounds(29, 359, 468, 44);
 		panel_5.add(scrollPane_3);
 		
 		answerField = new JTextField();
 		answerField.setEditable(false);
 		scrollPane_3.setViewportView(answerField);
 		answerField.setColumns(10);
+		
+		JScrollPane scrollPane_2 = new JScrollPane(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		scrollPane_2.setBounds(29, 92, 580, 255);
+		panel_5.add(scrollPane_2);
+		
+		JTextPane convoPane = new JTextPane();
+		convoPane.setEditable(false);
+		scrollPane_2.setViewportView(convoPane);
+		
+		JButton sendButton = new JButton("Send");
+		sendButton.setEnabled(false);
+		sendButton.setBounds(509, 363, 90, 28);
+		panel_5.add(sendButton);
 		
 		AnswerModeHandler a=new AnswerModeHandler();
 		
@@ -210,22 +225,20 @@ public class omegleGUI {
 				{
 					btnStartConvo.setText("Stop Conversation");
 					answerField.setEditable(true);
-					
-					
+					a.setDetails(convoPane, questionLabel, answerField, sendButton, btnStartConvo);
+					a.handler(false);
+				}
+				else if(btnStartConvo.getText().equals("Stop Conversation"))
+				{
+					btnStartConvo.setText("Start Conversation");
+					a.handler(true);
 				}
 				
 			}
 		});
-		btnStartConvo.setBounds(213, 390, 160, 26);
+		btnStartConvo.setBounds(212, 415, 160, 26);
 		panel_5.add(btnStartConvo);
 		
-		JScrollPane scrollPane_2 = new JScrollPane(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-		scrollPane_2.setBounds(29, 70, 543, 255);
-		panel_5.add(scrollPane_2);
-		
-		JTextPane convoPane = new JTextPane();
-		convoPane.setEditable(false);
-		scrollPane_2.setViewportView(convoPane);
 		
 		JPanel panel_1 = new JPanel();
 		tabbedPane.addTab("Logs", null, panel_1, null);

@@ -9,5 +9,10 @@ public class eventHandler {
 	{
 		this.eventnotice=eventnotice;
 	}
+	
+	public List<String[]> getEvents()
+	{
+		return eventnotice;
+	}
 
 }
